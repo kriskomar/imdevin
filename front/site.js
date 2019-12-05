@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     var registerCount = function() {
         $.post({
-            url: "",
+            url: "https://pgnjbmhdu3.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda",
             async: true,
             success: function (data) {
                 updateOutput(data)
