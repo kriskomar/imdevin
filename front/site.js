@@ -1,19 +1,21 @@
 $(document).ready(function() {
 
     var registerCount = function() {
-        $.post({
-            url: "https://pgnjbmhdu3.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda",
+        $.get({
+            url: "https://g28h568nd2.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda",
+            data: { "action": "post" },
             async: true,
             success: function (data) {
-                updateOutput(data)
+                getCount();
             },
             cache: false
         });
     };
 
     var getCount = function() {
-        $.post({
-            url: "",
+        $.get({
+            url: "https://g28h568nd2.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda",
+            data: { "action": "get" },
             async: true,
             success: function (data) {
                 updateOutput(data);
