@@ -9,21 +9,23 @@ const PRIMARY_KEY = process.env.PRIMARY_KEY;
 
 exports.handler = async (event, context, callback) => {
     var response;
-    
-    if(event.action == "post"){
-        response = await saveVisitor();
-    }
-    if(event.action == "get"){
-        response = await getVisitorCount();
-    }
-    if(!response) {
+
+    if(event && event.queryStringParameters && event.queryStringParameters.action){
+        if(event.queryStringParameters.action == "post"){
+            response = await saveVisitor();
+        }
+        if(event.queryStringParameters.action == "get"){
+            response = await getVisitorCount();
+        }
+    } else {
         return {
             "statusCode": 400,
-            "body": "Response was null. Didn't hit either path!"
+            "body": "Response was null. Didn't hit either path! event=", event,
+            headers: { "Access-Control-Allow-Origin": "http://imdevin.net" }
           };
     }
 
-    return response; // callback(null, response);
+    return response;
   }
 
 let saveVisitor = async () => {
@@ -42,16 +44,14 @@ let saveVisitor = async () => {
         const data = await ddb.updateItem(params).promise();
         return { 
             "statusCode": 200, 
-            "body": JSON.stringify(data)
-            //headers: { "Content-Type": "application/json" },
-            //isBase64Encoded: false
+            "body": JSON.stringify(data),
+            headers: { "Access-Control-Allow-Origin": "http://imdevin.net" }
         };
      } catch (error) {
         return {
           "statusCode": 400,
-          "body": `Could not fetch: ${error.stack}`
-          //headers: { "Content-Type": "application/json" },
-          //isBase64Encoded: false
+          "body": `Could not fetch: ${error.stack}`,
+          headers: { "Access-Control-Allow-Origin": "http://imdevin.net" }
         };
     }
 };
@@ -68,16 +68,14 @@ let getVisitorCount = async () => {
         const data = await ddb.getItem(params).promise();
         return { 
             "statusCode": 200, 
-            "body": JSON.stringify(data)
-            //headers: { "Content-Type": "application/json" },
-            //isBase64Encoded: false
+            "body": JSON.stringify(data),
+            headers: { "Access-Control-Allow-Origin": "http://imdevin.net" }
         };
      } catch (error) {
         return {
           "statusCode": 400,
-          "body": `Could not fetch: ${error.stack}`
-          //headers: { "Content-Type": "application/json" },
-          //isBase64Encoded: false
+          "body": `Could not fetch: ${error.stack}`,
+          headers: { "Access-Control-Allow-Origin": "http://imdevin.net" }
         };
     }
 };

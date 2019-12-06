@@ -2,8 +2,7 @@ $(document).ready(function() {
 
     var registerCount = function() {
         $.get({
-            url: "https://g28h568nd2.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda",
-            data: { "action": "post" },
+            url: "https://g28h568nd2.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda?action=post",
             async: true,
             success: function (data) {
                 getCount();
@@ -14,8 +13,7 @@ $(document).ready(function() {
 
     var getCount = function() {
         $.get({
-            url: "https://g28h568nd2.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda",
-            data: { "action": "get" },
+            url: "https://g28h568nd2.execute-api.us-west-2.amazonaws.com/default/im-devin-lambda?action=get",
             async: true,
             success: function (data) {
                 updateOutput(data.Item.Val);
@@ -25,7 +23,7 @@ $(document).ready(function() {
     };
 
     var updateOutput = function(count) {
-        $("#counter").html(count)
+        $("#counter").numberAnimate('set', count);
     };
 
     var $button = document.querySelector("#no-button");
@@ -37,10 +35,10 @@ $(document).ready(function() {
       TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
     });
 
-    $("body").fadeIn(2000);
     $("#no-button").click(function() {
         registerCount();
     });
-    setInterval(getCount(), 1000);
-
+    $("#counter").numberAnimate({ animationTimes: [100, 500, 100] });
+    setInterval(getCount, 1000);
+    $("body").fadeIn(2000);
 });
