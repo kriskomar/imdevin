@@ -18,7 +18,7 @@ $(document).ready(function() {
             data: { "action": "get" },
             async: true,
             success: function (data) {
-                updateOutput(data);
+                updateOutput(data.Item.Val);
             },
             cache: false
         });
@@ -37,12 +37,10 @@ $(document).ready(function() {
       TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
     });
 
-    // get current count on an interval
-    setInterval(getCount(), 1000);
-
-    $("body").fadeIn(1000);
+    $("body").fadeIn(2000);
     $("#no-button").click(function() {
-
         registerCount();
     });
+    setInterval(getCount(), 1000);
+
 });
