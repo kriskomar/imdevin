@@ -22,8 +22,14 @@ $(document).ready(function() {
         });
     };
 
+    var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
     var updateOutput = function(count) {
-        $("#counter").numberAnimate('set', count);
+        $('#counter').animateNumber(
+        {
+            number: count,
+            numberStep: comma_separator_number_step
+        }
+        );
     };
 
     var $button = document.querySelector("#no-button");
@@ -38,7 +44,6 @@ $(document).ready(function() {
     $("#no-button").click(function() {
         registerCount();
     });
-    $("#counter").numberAnimate({ animationTimes: [100, 500, 100] });
     setInterval(getCount, 1000);
     $("body").fadeIn(2000);
 });

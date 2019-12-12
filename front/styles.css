@@ -37,6 +37,7 @@
     font-size: 26vw;
     width: 100%;
     margin-bottom: 4vh;
+    line-height: .8em;
   }
   .no-button {
     background: linear-gradient(to bottom, #AAAAAA 0%, #FFFFFF 100%);
@@ -51,12 +52,13 @@
     height: 9vh;
     font-size: 3vw;
     font-weight: 600;
-
+    z-index: 65535;
   }
   .counter {
     color: #A9E800;
     font-size: 31vw;
     margin: 0 1vw 0 1vw;
+    line-height: .75em;
   }
   .counter div {
     width: 12vw !important;
